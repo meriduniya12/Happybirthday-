@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lovely Wishes for Saloni</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top right, #ffe6f0, #fff5f5);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      position: relative;
+      height: 100vh;
+      color: #b30059;
+    }
+
+    h1 {
+      text-align: center;
+      padding-top: 50px;
+      font-size: 3em;
+      text-shadow: 1px 1px 5px #fff;
+    }
+
+    .quote-slider {
+      width: 90%;
+      max-width: 600px;
+      margin: 40px auto 20px;
+      text-align: center;
+      background: #fff0f5;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.6);
+      padding: 30px;
+      position: relative;
+    }
+
+    .quote {
+      display: none;
+      font-size: 1.3em;
+      padding: 10px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .quote.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .slider-buttons {
+      margin-top: 20px;
+    }
+
+    .slider-buttons button,
+    .secret-buttons button {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 1em;
+      border: none;
+      border-radius: 25px;
+      background: #ff66b2;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .slider-buttons button:hover,
+    .secret-buttons button:hover {
+      transform: scale(1.1);
+      background: #e60073;
+    }
+
+    .secret-buttons {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .secret-message {
+      text-align: center;
+      font-size: 1.2em;
+      margin-top: 20px;
+      color: #800040;
+      display: none;
+      animation: fadeIn 1.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .flower {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3TR7F44ggxDCdLF1JmaLznQ2ZHM17Ux1dsAd5Xpc6u1S9CapfpqC4yGiK&s=10');
+      background-size: cover;
+      animation: fall 8s linear infinite;
+      opacity: 0.9;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+<h1>Happy Birthday My Dearest</h1>
+  <h2>💐 Special Wishes for Saloni 💐</h2>
+
+  <div class="quote-slider">
+    <div class="quote active">"You are like sunshine wrapped in petals. Stay blooming always!"</div>
+    <div class="quote">"The world is more colorful with you in it, Saloni!"</div>
+    <div class="quote">"A true friend like you makes life a celebration every day."</div>
+    <div class="quote">"If smiles were flowers, yours would be the prettiest garden."</div>
+
+    <div class="slider-buttons">
+      <button onclick="prevQuote()">⬅️ Prev</button>
+      <button onclick="nextQuote()">Next ➡️</button>
+    </div>
+  </div>
+
+  <div class="secret-buttons">
+    <button onclick="revealMessage(1)">🌷 Secret 1</button>
+    <button onclick="revealMessage(2)">🌸 Secret 2</button>
+    <button onclick="revealMessage(3)">💌 Secret 3</button>
+  </div>
+
+  <div id="secretMessage" class="secret-message"></div>
+
+  <script>
+    let currentIndex = 0;
+    const quotes = document.querySelectorAll(".quote");
+
+    function showQuote(index) {
+      quotes.forEach(q => q.classList.remove("active"));
+      quotes[index].classList.add("active");
+    }
+
+    function nextQuote() {
+      currentIndex = (currentIndex + 1) % quotes.length;
+      showQuote(currentIndex);
+    }
+
+    function prevQuote() {
+      currentIndex = (currentIndex - 1 + quotes.length) % quotes.length;
+      showQuote(currentIndex);
+    }
+
+    function revealMessage(num) {
+      const messages = {
+        1: "Dear Saloni, you are one of the most beautiful souls I've ever met. 🌸",
+        2: "You bring joy like the first rain of spring. Stay magical! 💖",
+        3: "Nandini is lucky to call you her friend. This bond is forever. 💫"
+      };
+      const box = document.getElementById('secretMessage');
+      box.style.display = 'block';
+      box.innerText = messages[num];
+    }
+
+    // Flower Rain
+    function createFlower() {
+      const flower = document.createElement('div');
+      flower.classList.add('flower');
+      flower.style.left = Math.random() * 100 + 'vw';
+      flower.style.animationDuration = (Math.random() * 3 + 5) + 's';
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), 8000);
+    }
+    setInterval(createFlower, 300);
+  </script>
+
+</body>
+</html>
